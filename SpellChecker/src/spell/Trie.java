@@ -1,9 +1,11 @@
 package spell;
 
+import java.util.List;
+
 public class Trie implements ITrie {
     Node root = new Node();
     int word_count = 0;
-    int num_nodes = 0;
+    int num_nodes = 1;
     public Trie() {}
 
     @Override
@@ -20,7 +22,9 @@ public class Trie implements ITrie {
             current_node = nodes[pos];
         }
         current_node.incrementValue();
-        word_count++;
+        if (current_node.getValue() == 1) {
+            word_count++;
+        }
     }
 
     @Override
@@ -35,7 +39,10 @@ public class Trie implements ITrie {
             }
             current_node = nodes[pos];
         }
-        return current_node;
+        if (current_node.getValue() > 0) {
+            return current_node;
+        }
+        return null;
     }
 
 
@@ -51,14 +58,37 @@ public class Trie implements ITrie {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return root.hashCode() * num_nodes * word_count;
     }
 
     @Override
-    public boolean equals(Object obj) {return false;}
+    public boolean equals(Object obj) {
+
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Trie t = (Trie)obj;
+
+        if (t.word_count == this.word_count && t.num_nodes == this.num_nodes) {
+            return this.root.equals(((Trie) obj).root);
+        }
+
+        return false;
+
+
+    }
 
     @Override
     public String toString() {
-        return super.toString();
+        return root.make_words("");
     }
 }

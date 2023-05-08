@@ -20,7 +20,6 @@ public class Main {
 		//
         //Create an instance of your corrector here
         //
-		Node nd = new Node();
 		SpellCorrector corrector = new SpellCorrector();
 
 		corrector.useDictionary(dictionaryFileName);
