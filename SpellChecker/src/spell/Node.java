@@ -38,8 +38,13 @@ public class Node implements INode{
             return false;
         }
 
+        Node their_node = (Node) obj;
+        if (their_node.getValue() != this.getValue()) {
+            return false;
+        }
+
         Node[] my_children = this.getChildren();
-        Node[] their_children = ((Node) obj).getChildren();
+        Node[] their_children = their_node.getChildren();
         for (int i = 0; i < 26; i++) {
             if (my_children[i] == null) {
                 if (their_children[i] != null) {
@@ -58,7 +63,7 @@ public class Node implements INode{
         Node[] kids = this.getChildren();
         for (int i = 0; i < 26; i++) {
             if (kids[i] != null) {
-                code *= kids[i].hashCode() * (i + 1);
+                code *= i + 1;
             }
         }
         return code;
