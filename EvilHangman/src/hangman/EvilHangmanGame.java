@@ -11,26 +11,37 @@ public class EvilHangmanGame implements IEvilHangmanGame {
     Map<String, SortedSet<String>> word_map = new HashMap<>();
     String word;
 
+
     @Override
     public void startGame(File dictionary, int wordLength) throws IOException, EmptyDictionaryException {
-        word_set.clear();
+//      clear items from last round
+        word_map.clear();
+        guessed_letters.clear();
+        word = "_".repeat(wordLength);
+
+//      Initialize Word Set
         Scanner scanner = new Scanner(dictionary);
+        word_set.clear();
         while (scanner.hasNext()) {
             String word = scanner.next();
             if (word.length() == wordLength) {
                 word_set.add(word);
             }
         }
-        word = "-".repeat(wordLength);
+//      Empty Dictionary Error
         if (word_set.isEmpty()) {
             throw new EmptyDictionaryException();
         }
     }
 
-    String getKey(String word, char guess) {
+    String getKey(String word2, char guess) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) == guess) {
+            if (!String.valueOf(word.charAt(i)).equals("_")) {
+                result.append(word.charAt(i));
+                continue;
+            }
+            if (word2.charAt(i) == guess) {
                 result.append(guess);
             }
             else {
@@ -51,7 +62,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
         return result;
     }
 
-    String right_most(String word1, String word2, char guess) {
+    String right_word(String word1, String word2, char guess) {
         for (int i=0; i<word1.length();i++) {
             char c1 = word1.charAt(i);
             char c2 = word2.charAt(i);
@@ -67,14 +78,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
         return word1;
     }
 
-    @Override
-    public Set<String> makeGuess(char guess1) throws GuessAlreadyMadeException {
-        Character guess = Character.toLowerCase(guess1);
-        if (guessed_letters.contains(guess)) {
-            throw new GuessAlreadyMadeException();
-        }
-        guessed_letters.add(guess);
-
+    void build_word_map(char guess) {
         word_map.clear();
         for (String word:word_set) {
             String key = getKey(word, guess);
@@ -83,31 +87,44 @@ public class EvilHangmanGame implements IEvilHangmanGame {
             }
             word_map.get(key).add(word);
         }
+    }
 
-        String most = null;
+
+    @Override
+    public Set<String> makeGuess(char guess1) throws GuessAlreadyMadeException {
+        // Make LowerCase
+        char guess = Character.toLowerCase(guess1);
+
+        // Check if already guessed
+        if (guessed_letters.contains(guess)) {
+            throw new GuessAlreadyMadeException();
+        }
+        guessed_letters.add(guess);
+
+        //partition the word set
+        build_word_map(guess);
+
         for (String k:word_map.keySet()) {
-            if (most == null) {
-                most = k;
-                continue;
+            if (!word_map.containsKey(word)) {
+                word = k;
             }
-            if (word_map.get(k).size() > word_map.get(most).size()) {
-                most = k;
-            } else if (word_map.get(k).size() == word_map.get(most).size()) {
-                if (most.contains(guess.toString()) && k.contains(guess.toString())) {
-                    if (num_letters(k, guess) < num_letters(most, guess)) {
-                        most = k;
+            if (word_map.get(k).size() > word_map.get(word).size()) {
+                word = k;
+            } else if (word_map.get(k).size() == word_map.get(word).size()) {
+                if (word.contains(Character.toString(guess)) && k.contains(Character.toString(guess))) {
+                    if (num_letters(k, guess) < num_letters(word, guess)) {
+                        word = k;
                     }
-                    if (num_letters(k, guess) == num_letters(most, guess)) {
-                        most = right_most(most, k, guess);
+                    if (num_letters(k, guess) == num_letters(word, guess)) {
+                        word = right_word(word, k, guess);
                     }
-                } else if (!k.contains(guess.toString())) {
-                    most = k;
+                } else if (!k.contains(Character.toString(guess))) {
+                    word = k;
                 }
 
             }
         }
-        word = most;
-        word_set = word_map.get(most);
+        word_set = word_map.get(word);
         return word_set;
     }
 
