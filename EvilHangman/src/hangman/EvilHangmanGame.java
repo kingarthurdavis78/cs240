@@ -24,7 +24,7 @@ public class EvilHangmanGame implements IEvilHangmanGame {
         word_set.clear();
         while (scanner.hasNext()) {
             String word = scanner.next();
-            if (word.length() == wordLength) {
+            if (word.length() == wordLength && word.matches("[a-zA-Z]*")) {
                 word_set.add(word);
             }
         }

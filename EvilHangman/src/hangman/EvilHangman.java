@@ -26,12 +26,20 @@ public class EvilHangman {
             System.out.printf("Word: %s%n", game.word);
             System.out.print("Enter guess: ");
             String s = in.nextLine();
+            if (s.length() != 1 || !s.matches("[a-zA-Z]")) {
+                System.out.println("Invalid Input");
+                i++;
+                continue;
+            }
             char guess = s.charAt(0);
             try {
                 game.makeGuess(guess);
             }
             catch (GuessAlreadyMadeException e) {
-                throw new RuntimeException(e);
+                System.out.printf("You already guessed %s%n", guess);
+                System.out.println();
+                i++;
+                continue;
             }
             if (!game.word.contains(s)) {
                 System.out.printf("Sorry there are no %s's%n", s);
@@ -45,12 +53,20 @@ public class EvilHangman {
                     }
                 }
                 System.out.printf("Yes, there is %d %s%n", result, s);
+                i++;
             }
             System.out.println();
+            if (!game.word.contains("_")) {
+                System.out.println("You win!");
+                System.out.printf("The word was %s%n", game.word);
+                break;
+            }
 
         }
-        System.out.println("You lose!");
-        System.out.println(game.word_set.first());
+        if (game.word.contains("_")) {
+            System.out.println("You lose!");
+            System.out.printf("The word was %s%n", game.word_set.first());
+        }
 
     }
 
