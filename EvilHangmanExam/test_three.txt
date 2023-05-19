@@ -1,0 +1,103 @@
+/Library/Java/JavaVirtualMachines/jdk-20.jdk/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=64085:/Applications/IntelliJ IDEA.app/Contents/bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/out/production/EvilHangmanExam:/Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/jars/junit-5.0.jar:/Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/jars/opentest4j-1.1.1.jar:/Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/jars/junit-jupiter-api-5.2.0.jar:/Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/jars/junit-jupiter-engine-5.2.0.jar:/Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/jars/junit-vintage-engine-5.4.0.jar:/Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/jars/junit-platform-engine-1.2.0.jar:/Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/jars/junit-platform-commons-1.2.0.jar:/Users/kingarthur78/Documents/GitHub/cs240/EvilHangmanExam/jars/junit-platform-launcher-1.2.0.jar hangman.EvilHangman dictionary.txt 5 12
+You have 12 guesses left
+Used letters []
+Word: _____
+Enter a guess:
+q 1 we y Q w xx x x t T e i o u a 23 e2 2e z x c v
+Sorry there are no q's
+
+You have 11 guesses left
+Used letters [q]
+Word: _____
+Enter a guess:
+Invalid Input
+Enter a guess:
+Invalid Input
+Enter a guess:
+Sorry there are no y's
+
+You have 10 guesses left
+Used letters [q, y]
+Word: _____
+Enter a guess:
+Guess already made
+Enter a guess:
+Sorry there are no w's
+
+You have 9 guesses left
+Used letters [q, w, y]
+Word: _____
+Enter a guess:
+Invalid Input
+Enter a guess:
+Sorry there are no x's
+
+You have 8 guesses left
+Used letters [q, w, x, y]
+Word: _____
+Enter a guess:
+Guess already made
+Enter a guess:
+Sorry there are no t's
+
+You have 7 guesses left
+Used letters [q, t, w, x, y]
+Word: _____
+Enter a guess:
+Guess already made
+Enter a guess:
+Sorry there are no e's
+
+You have 6 guesses left
+Used letters [e, q, t, w, x, y]
+Word: _____
+Enter a guess:
+Sorry there are no i's
+
+You have 5 guesses left
+Used letters [e, i, q, t, w, x, y]
+Word: _____
+Enter a guess:
+Sorry there are no o's
+
+You have 4 guesses left
+Used letters [e, i, o, q, t, w, x, y]
+Word: _____
+Enter a guess:
+Sorry there are no u's
+
+You have 3 guesses left
+Used letters [e, i, o, q, t, u, w, x, y]
+Word: _____
+Enter a guess:
+There are 1 a's
+
+You have 3 guesses left
+Used letters [a, e, i, o, q, t, u, w, x, y]
+Word: __a__
+Enter a guess:
+Invalid Input
+Enter a guess:
+Invalid Input
+Enter a guess:
+Invalid Input
+Enter a guess:
+Sorry there are no z's
+
+You have 2 guesses left
+Used letters [a, e, i, o, q, t, u, w, x, y, z]
+Word: __a__
+Enter a guess:
+Guess already made
+Enter a guess:
+Sorry there are no c's
+
+You have 1 guesses left
+Used letters [a, c, e, i, o, q, t, u, w, x, y, z]
+Word: __a__
+Enter a guess:
+Sorry there are no v's
+
+Sorry, you lost! The word was: bhang
+
+Process finished with exit code 0

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.SortedSet;
 
 public class SpellCorrector implements ISpellCorrector{
     Trie dictionary = new Trie();
